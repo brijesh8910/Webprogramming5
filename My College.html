@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My College - Jain University</title>
+
+<style>
+/* whole page - dark with gold text.
+   the campus drawing is still the background, just covered by a dark layer */
+body {
+  margin: 0;
+  font-family: Verdana, Tahoma, sans-serif;
+  color: #ddd;
+  background-color: #151515;
+  background-image: linear-gradient(rgba(21,21,21,0.94), rgba(21,21,21,0.94)), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500' preserveAspectRatio='xMidYMax slice'><defs><linearGradient id='s' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='rgb(110,175,235)'/><stop offset='1' stop-color='rgb(215,235,250)'/></linearGradient></defs><rect width='800' height='500' fill='url(%23s)'/><circle cx='690' cy='80' r='38' fill='rgb(255,224,120)'/><ellipse cx='160' cy='90' rx='60' ry='18' fill='white' opacity='.85'/><ellipse cx='210' cy='80' rx='45' ry='16' fill='white' opacity='.85'/><rect y='400' width='800' height='100' fill='rgb(96,160,90)'/><rect x='230' y='270' width='340' height='135' fill='rgb(176,92,70)'/><rect x='360' y='215' width='80' height='190' fill='rgb(196,108,84)'/><polygon points='350,215 400,170 450,215' fill='rgb(120,60,50)'/><rect x='380' y='345' width='40' height='60' fill='rgb(80,50,40)'/><g fill='rgb(250,235,170)'><rect x='255' y='295' width='32' height='40'/><rect x='305' y='295' width='32' height='40'/><rect x='463' y='295' width='32' height='40'/><rect x='513' y='295' width='32' height='40'/><rect x='378' y='240' width='44' height='30'/></g><rect x='392' y='140' width='4' height='32' fill='rgb(70,70,70)'/><polygon points='396,140 424,150 396,160' fill='rgb(230,100,40)'/><rect x='95' y='350' width='14' height='55' fill='rgb(110,75,45)'/><circle cx='102' cy='335' r='42' fill='rgb(52,120,62)'/><rect x='690' y='360' width='14' height='45' fill='rgb(110,75,45)'/><circle cx='697' cy='345' r='36' fill='rgb(52,120,62)'/></svg>");
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* college name + address */
+#header {
+  text-align: center;
+  padding: 60px 10px 38px 10px;
+  background: radial-gradient(ellipse at top, rgba(247,217,47,0.16), rgba(0,0,0,0) 65%);
+  border-bottom: 2px solid #d4b52a;
+  box-shadow: 0 3px 16px rgba(212,181,42,0.3);
+}
+#header h1 {
+  margin: 0;
+  font-size: 56px;
+  letter-spacing: 4px;
+  color: #f7d92f;
+  text-shadow: 0 2px 10px rgba(247,217,47,0.35);
+}
+#header .line {
+  width: 140px;
+  height: 3px;
+  margin: 18px auto 0 auto;
+  background: linear-gradient(to right, transparent, #f7d92f, transparent);
+}
+#header p {
+  margin: 18px 0 0 0;
+  font-size: 18px;
+  font-style: italic;
+  color: #ccc;
+}
+
+#main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 18px 30px 18px;
+}
+
+/* scrolling announcement box */
+#news {
+  margin-top: 38px;
+  padding: 16px 10px;
+  border: 1px solid #d4b52a;
+  border-radius: 8px;
+  background-color: #1c1c1c;
+  box-shadow: 0 0 14px rgba(212,181,42,0.3);
+  color: #f7d92f;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+h2.title {
+  text-align: center;
+  color: #f7d92f;
+  font-size: 32px;
+  letter-spacing: 2px;
+  margin: 60px 0 30px 0;
+}
+
+/* three picture boxes */
+#cards {
+  display: flex;
+  gap: 20px;
+}
+.card {
+  flex: 1;
+  border: 1px solid #d4b52a;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #1c1c1c;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(212,181,42,0.3);
+}
+.card svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.card p {
+  margin: 0;
+  padding: 14px 5px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  color: #d4b52a;
+  border-top: 1px solid #d4b52a;
+}
+
+/* school boxes */
+.school {
+  margin-top: 50px;
+  padding: 28px 28px 12px 28px;
+  border: 1px solid #d4b52a;
+  border-radius: 14px;
+  background: linear-gradient(#1e1e1e, #171717);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+.school h2 {
+  margin: 0 0 26px 0;
+  padding-bottom: 14px;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: #f7d92f;
+  border-bottom: 2px solid #8b0a2a;
+}
+
+/* departments sit in two columns on big screens */
+.depts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+}
+.dept {
+  padding: 18px 22px 8px 22px;
+  margin-bottom: 4px;
+  background-color: #262626;
+  border-left: 5px solid #d4b52a;
+  border-radius: 0 8px 8px 0;
+  transition: background-color 0.2s, border-left-color 0.2s;
+}
+.dept:hover {
+  background-color: #2f2b1e;
+  border-left-color: #8b0a2a;
+}
+.dept h3 {
+  margin: 0 0 14px 0;
+  color: white;
+  font-size: 19px;
+  line-height: 1.3;
+}
+.dept ul {
+  list-style: square;
+  color: #d4b52a;
+  padding-left: 22px;
+}
+.dept li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #bbb;
+}
+.dept b {
+  color: #f7d92f;
+}
+
+/* course names - each one has its own colour, style and font */
+.c1 { color: #ff7a8a; font-family: "Times New Roman", serif; font-style: italic; }
+.c2 { color: #7be08b; font-family: "Courier New", monospace; font-weight: bold; }
+.c3 { color: #ffb347; font-family: "Comic Sans MS", cursive; text-decoration: underline; }
+.c4 { color: #c79bff; font-family: Impact, sans-serif; }
+.c5 { color: #5fd8d0; font-family: Georgia, serif; font-weight: bold; font-style: italic; }
+.c6 { color: #e0a070; font-family: Verdana, sans-serif; letter-spacing: 1px; }
+
+#footer {
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  padding: 18px 0 28px 0;
+  border-top: 1px solid #3a3320;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* phone screens */
+@media (max-width: 650px) {
+  #cards { flex-direction: column; }
+  #header h1 { font-size: 34px; letter-spacing: 2px; }
+  .depts { grid-template-columns: 1fr; }
+  .school { padding: 20px 14px 8px 14px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- top part -->
+<div id="header">
+  <h1>JAIN UNIVERSITY</h1>
+  <div class="line"></div>
+  <p>45th km, NH - 209, Jakkasandra Post, Kanakapura Rd, Bengaluru, Karnataka 562112</p>
+</div>
+
+<div id="main">
+
+  <!-- scrolling text (stops when mouse is on it) -->
+  <div id="news">
+    <marquee onmouseover="this.stop()" onmouseout="this.start()">
+      &#128226; ANNOUNCEMENT: Internal Examinations scheduled from 15-09-2026 till 18-09-2026! &nbsp;&#9679;&nbsp; Attendance criteria &amp; hall tickets to be collected from the department office &nbsp;&#9679;&nbsp; Annual Day on 15th December &nbsp;&#9679;&nbsp; Last date to pay fees - 20th November
+    </marquee>
+  </div>
+
+  <h2 class="title">CAMPUS OVERVIEW</h2>
+
+  <!-- 3 pictures (small drawings, replace with real photos if you have them) -->
+  <div id="cards">
+
+    <div class="card">
+      <svg viewBox="0 0 300 200">
+        <rect width="300" height="200" fill="#6fb0ea"/>
+        <ellipse cx="60" cy="35" rx="40" ry="12" fill="white" opacity="0.9"/>
+        <ellipse cx="240" cy="50" rx="35" ry="10" fill="white" opacity="0.9"/>
+        <rect x="20" y="70" width="260" height="130" fill="#9a958a"/>
+        <polygon points="40,70 150,25 260,70" fill="#f3f1ec"/>
+        <rect x="140" y="25" width="20" height="100" fill="#f3f1ec"/>
+        <rect x="95" y="125" width="110" height="75" fill="#e8e4da"/>
+        <rect x="40" y="95" width="18" height="24" fill="#222"/><rect x="40" y="140" width="18" height="24" fill="#222"/>
+        <rect x="242" y="95" width="18" height="24" fill="#222"/><rect x="242" y="140" width="18" height="24" fill="#222"/>
+      </svg>
+      <p>FET Campus Main Entrance</p>
+    </div>
+
+    <div class="card">
+      <svg viewBox="0 0 300 200">
+        <rect width="300" height="200" fill="#8fc3ee"/>
+        <rect y="150" width="300" height="50" fill="#5b9a55"/>
+        <rect x="25" y="80" width="95" height="75" fill="#b0614a"/>
+        <rect x="140" y="55" width="70" height="100" fill="#c4705a"/>
+        <rect x="225" y="95" width="55" height="60" fill="#a35542"/>
+        <g fill="#f6e7a6"><rect x="38" y="95" width="16" height="18"/><rect x="68" y="95" width="16" height="18"/><rect x="153" y="70" width="14" height="16"/><rect x="180" y="70" width="14" height="16"/><rect x="153" y="105" width="14" height="16"/><rect x="180" y="105" width="14" height="16"/></g>
+      </svg>
+      <p>Academic &amp; Research Blocks</p>
+    </div>
+
+    <div class="card">
+      <svg viewBox="0 0 300 200">
+        <rect width="300" height="200" fill="#9ccaf0"/>
+        <circle cx="250" cy="40" r="22" fill="#ffe27a"/>
+        <rect y="120" width="300" height="80" fill="#5fa65a"/>
+        <rect x="0" y="165" width="300" height="12" fill="#d9c9a3"/>
+        <rect x="55" y="90" width="10" height="40" fill="#6e4b2b"/><circle cx="60" cy="80" r="30" fill="#2f7a3d"/>
+        <rect x="190" y="95" width="10" height="35" fill="#6e4b2b"/><circle cx="195" cy="85" r="26" fill="#2f7a3d"/>
+      </svg>
+      <p>Kanakapura Campus Grounds</p>
+    </div>
+
+  </div>
+
+  <!-- schools and courses -->
+  <div class="school">
+    <h2>SCHOOL OF AEROSPACE ENGINEERING</h2>
+    <div class="depts">
+      <div class="dept">
+        <h3>Department of Aerospace Engineering</h3>
+        <ul>
+          <li><b>B.Tech</b> in <span class="c1">Aerospace Engineering</span></li>
+          <li><b>B.Tech</b> in <span class="c2">Aeronautical Engineering</span></li>
+          <li><b>M.Tech</b> in <span class="c3">Aerospace Engineering</span></li>
+          <li><b>Ph.D.</b> in <span class="c4">Aerospace Structures &amp; Propulsion</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="school">
+    <h2>SCHOOL OF ENGINEERING &amp; TECHNOLOGY</h2>
+    <div class="depts">
+      <div class="dept">
+        <h3>Department of Civil Engineering</h3>
+        <ul>
+          <li><b>B.Tech</b> in <span class="c5">Civil Engineering</span></li>
+          <li><b>M.Tech</b> in <span class="c6">Structural Engineering</span></li>
+          <li><b>M.Tech</b> in <span class="c1">Construction Project Management</span></li>
+        </ul>
+      </div>
+      <div class="dept">
+        <h3>Department of Electrical &amp; Electronics Engineering</h3>
+        <ul>
+          <li><b>B.Tech</b> in <span class="c2">Electrical &amp; Electronics Engineering</span></li>
+          <li><b>B.Tech</b> in <span class="c3">EEE (Electric Vehicle Technology)</span></li>
+          <li><b>M.Tech</b> in <span class="c4">Power Systems</span></li>
+        </ul>
+      </div>
+      <div class="dept">
+        <h3>Department of Electronics and Communications Engineering</h3>
+        <ul>
+          <li><b>B.Tech</b> in <span class="c5">Electronics &amp; Communication Engineering</span></li>
+          <li><b>B.Tech</b> in <span class="c6">ECE (VLSI &amp; Embedded Systems)</span></li>
+          <li><b>M.Tech</b> in <span class="c1">Communication Systems</span></li>
+        </ul>
+      </div>
+      <div class="dept">
+        <h3>Department of Mechanical Engineering</h3>
+        <ul>
+          <li><b>B.Tech</b> in <span class="c2">Mechanical Engineering</span></li>
+          <li><b>B.Tech</b> in <span class="c3">Robotics &amp; Automation</span></li>
+          <li><b>M.Tech</b> in <span class="c4">Thermal Engineering</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="footer">Jain University &copy; 2026</div>
+
+</body>
+</html>
